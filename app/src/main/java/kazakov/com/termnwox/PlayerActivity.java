@@ -149,27 +149,29 @@ public class PlayerActivity extends AppCompatActivity implements SensorEventList
 
 
                 audioTrack.setPlaybackRate((int)freqOfTone);
-            }
 
+                if (lastY>0){
+                    volumeLevel  = volumeLevel+5;
+                    if (volumeLevel>100){
+                        volumeLevel = 100;
+                    }
 
-
-            if (lastY>0){
-                volumeLevel  = volumeLevel+5;
-                if (volumeLevel>100){
-                    volumeLevel = 100;
+                }else if (lastY<0){
+                    volumeLevel  = volumeLevel-5;
+                    if (volumeLevel<0){
+                        volumeLevel = 0;
+                    }
                 }
-
-            }else if (lastY<0){
-                volumeLevel  = volumeLevel-5;
-                if (volumeLevel<0){
-                    volumeLevel = 0;
+                if (audioTrack!=null) {
+                    audioTrack.setVolume((float) volumeLevel);
                 }
+                tvRate.setText(freqOfTone+"");
+                tvVolume.setText(volumeLevel+"");
             }
-            if (audioTrack!=null) {
-                audioTrack.setVolume((float) volumeLevel);
-            }
-            tvRate.setText(freqOfTone+"");
-            tvVolume.setText(volumeLevel+"");
+
+
+
+
         }
 
 
